@@ -16,27 +16,46 @@ europeTeams.forEach(element => {
 });
 
 import allTeams from "./groups.js"
-
-// Importamos la clase grupo
 import Group from "./groups.js";
+import {groupA} from "./groups.js"
+import {groupB} from "./groups.js"
+import {groupC} from "./groups.js"
+import {groupD} from "./groups.js"
+import {groupE} from "./groups.js"
+import {groupF} from "./groups.js"
 
 
 // TODO Al arrancar el programa se deberá mostrar por pantalla la información de los equipos que hay en cada grupo y la planificación de partidos del mismo. ○Nombre del grupo ○Listado de los equipos (una en cada línea) 
 // Instanciamos los grupos y llamamos a la función riffle para sortear los equipos de cada grupo y hacerlo de manera aleatoria (La asignación de los equipos a cada grupo se realizará de manera aleatoria.)
 
-
-let groupA = new Group('groupA');
 groupA.riffle(allTeams)
-let groupB = new Group('groupB');
 groupB.riffle(allTeams)
-let groupC = new Group('groupC');
 groupC.riffle(allTeams)
+groupD.riffle(allTeams)
+groupE.riffle(allTeams)
+groupF.riffle(allTeams)
 
 
 // Pintamos los grupos en pantalla
 console.log(`GrupoA: ${groupA.teams}`)
 console.log(`GrupoB: ${groupB.teams}`)
 console.log(`GrupoC: ${groupC.teams}`)
+console.log(`GrupoD: ${groupD.teams}`)
+console.log(`GrupoE: ${groupE.teams}`)
+console.log(`GrupoF: ${groupF.teams}`)
 
-// TODO A    continuación se mostrarán los resultados de los partidos y la clasificación de cada grupo tras el final de la primera jornada de partidos, después los de la segunda jornada, y finalmente los de la tercera jornada.
+
+groupA.scheduleMatchDays();
+groupA.setTeams();
+
+groupA.matchDaySchedule.forEach((matchDay, matchDayIndex) => {
+    console.log(`JORNADA ${matchDayIndex+1}`)
+    matchDay.forEach(match => {
+        
+            console.log(`${match.home} vs ${match.away}`);
+    })
+    console.log(`=========================`)
+})
+
+// TODO A continuación se mostrarán los resultados de los partidos y la clasificación de cada grupo tras el final de la primera jornada de partidos, después los de la segunda jornada, y finalmente los de la tercera jornada.
 // TODO Una vez finalice la fase de grupos, se deberán anunciar el comienzo de la fase de eliminatorias. 
