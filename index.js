@@ -29,36 +29,62 @@ import {dataTeams} from "./classes/teams.js"
 // TODO Al arrancar el programa se deberá mostrar por pantalla la información de los equipos que hay en cada grupo y la planificación de partidos del mismo. ○Nombre del grupo ○Listado de los equipos (una en cada línea) 
 // Instanciamos los grupos y llamamos a la función riffle para sortear los equipos de cada grupo y hacerlo de manera aleatoria (La asignación de los equipos a cada grupo se realizará de manera aleatoria.)
 
-groupA.riffle()
-groupB.riffle()
-groupC.riffle()
-groupD.riffle()
-groupE.riffle()
-groupF.riffle()
+let allGroups = [groupA, groupB, groupC, groupD, groupE, groupF]
+allGroups.forEach((element, index) => {
+    element.riffle()
+    console.log(`\n`);
+    console.log(`${element.groupName}: ${element.getNames()}`)
+    console.log(`\n`);
+    element.scheduleMatchDays();
+    element.setTeams();
+
+    element.matchDaySchedule.forEach((matchDay, matchDayIndex) => {
+        console.log(`JORNADA ${matchDayIndex+1}`)
+        matchDay.forEach(match => {
+            
+                console.log(`${match.home} vs ${match.away}`);
+            })
+            console.log(`=========================`)
+        })
+    console.log(`\n`);    
+    element.start();
+
+});
+
+console.log(groupA.teams)
+
+
+
+// allGroups[0].riffle()
+// groupB.riffle()
+// groupC.riffle()
+// groupD.riffle()
+// groupE.riffle()
+// groupF.riffle()
 
 
 // Pintamos los grupos en pantalla
-console.log(`GrupoA: ${groupA.getNames()}`)
-console.log(`GrupoB: ${groupB.getNames()}`)
-console.log(`GrupoC: ${groupC.getNames()}`)
-console.log(`GrupoD: ${groupD.getNames()}`)
-console.log(`GrupoE: ${groupE.getNames()}`)
-console.log(`GrupoF: ${groupF.getNames()}`)
+// console.log(`GrupoA: ${groupA.getNames()}`)
+// console.log(`GrupoB: ${groupB.getNames()}`)
+// console.log(`GrupoC: ${groupC.getNames()}`)
+// console.log(`GrupoD: ${groupD.getNames()}`)
+// console.log(`GrupoE: ${groupE.getNames()}`)
+// console.log(`GrupoF: ${groupF.getNames()}`)
 
 
-groupA.scheduleMatchDays();
-groupA.setTeams();
+// groupA.scheduleMatchDays();
+// groupA.setTeams();
 
-groupA.matchDaySchedule.forEach((matchDay, matchDayIndex) => {
-    console.log(`JORNADA ${matchDayIndex+1}`)
-    matchDay.forEach(match => {
+// groupA.matchDaySchedule.forEach((matchDay, matchDayIndex) => {
+//     console.log(`JORNADA ${matchDayIndex+1}`)
+//     matchDay.forEach(match => {
         
-            console.log(`${match.home} vs ${match.away}`);
-    })
-    console.log(`=========================`)
-})
+//             console.log(`${match.home} vs ${match.away}`);
+//     })
+//     console.log(`=========================`)
+// })
 
-groupA.start()
+// groupA.start()
 
 
 

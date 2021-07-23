@@ -80,10 +80,11 @@ export default class Group {
         for (const matchDay of this.matchDaySchedule) {
             for (const match of matchDay) {
                 const result = this.playGame(match)
+                this.updateTeams(result)
                 console.log (`El resultado es ${result.homeTeamName} ${result.homeGoals} - ${result.awayTeamName} ${result.awayGoals}`)
             }
         }
-
+    
     }
 
     playGame (match) {
@@ -94,8 +95,79 @@ export default class Group {
             homeGoals: homeGoals,
             awayTeamName: match.away, 
             awayGoals: awayGoals
+        
+        }
+        
+    }
+
+    // updateTeams (result) {
+    //     this.teams.forEach(element => {
+    //         if (this.teams.name = result.homeTeamName) {
+    //             goalsFor += homeGoals;
+    //             goalsAgaints += awayGoals;
+    //         }
+            
+    //     });
+
+    // }
+
+    getTeamByName(name) {
+        return this.teams.find(team => team.name === name);
+    }
+
+    // actualiza las métricas de los equipos en función del marcador
+    updateTeams(result) { 
+
+        const localTeam = this.getTeamByName(result.homeTeamName);
+        const awayTeam = this.getTeamByName(result.awayTeamName);
+        
+        // actualizamos métricas de goles
+        localTeam.goalsFor += result.homeGoals;
+        localTeam.goalsAgainst += result.awayGoals;
+        awayTeam.goalsFor += result.awayGoals;
+        awayTeam.goalsAgainst += result.homeGoals;
+
+        // añadir 3 puntos al equipo que gana
+        if (result.homeGoals > result.awayGoals) {
+            localTeam.points += this.config.pointsPerWin;
+            awayTeam.points += this.config.pointsPerLose;   
+            localTeam.matchesWon++;
+            awayTeam.matchesLost++;
+        } else if (result.awayGoals > result.homeGoals) {
+            awayTeam.points += this.config.pointsPerWin;
+            localTeam.points += this.config.pointsPerLose; 
+            localTeam.matchesLost++;
+            awayTeam.matchesWon++;
+        } else {
+            localTeam.points += this.config.pointsPerDraw;
+            awayTeam.points += this.config.pointsPerDraw;
+            localTeam.matchesDraw++;
+            awayTeam.matchesDraw++;
         }
 
+    }
+
+    getStandings(){
+        // -1, 0, 1
+        this.teams.sort(function(teamA, teamB) {
+            if(teamA.points > teamB.points) {
+                return -1
+            } else if(teamA.points < teamB.points) {
+                return 1
+            } else {
+                const goalsDiffA = teamA.goalsFor - teamA.goalsAgainst; 
+                const goalsDiffB = teamB.goalsFor - teamB.goalsAgainst; 
+                if (goalsDiffA > goalsDiffB) {
+                    return -1
+                } else if( goalsDiffA < goalsDiffB) {
+                    return 1
+                } else {
+                    return 0
+                }
+            }
+        })
+
+        return this.teams;
     }
 } 
 

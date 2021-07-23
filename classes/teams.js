@@ -37,28 +37,29 @@ equipos.forEach(element => {
         matchesWon: 0,
         matchesDraw: 0,
         matchesLost: 0,
-        golesFor: 0,
-        golesAgainst: 0,
+        goalsFor: 0,
+        goalsAgainst: 0,
+        points: 0
 
-        addWins (wins) {
-            this.wins += wins;
-        },
+        // addWins (wins) {
+        //     this.wins += wins;
+        // },
     
-        addDefeats (defeats) {
-            this.defeats += defeats;
-        },
+        // addDefeats (defeats) {
+        //     this.defeats += defeats;
+        // },
     
-        addDraws (draws) {
-            this.draws += draws;
-        },
+        // addDraws (draws) {
+        //     this.draws += draws;
+        // },
     
-        addPoints () {
-            this.points = 3*this.wins + this.draws;
-        },
+        // addPoints () {
+        //     this.points = 3*this.wins + this.draws;
+        // },
     
-        addGoals (goals) {
-            this.goals += goals;
-        },
+        // addGoals (goals) {
+        //     this.goals += goals;
+        // },
 
 
     }
