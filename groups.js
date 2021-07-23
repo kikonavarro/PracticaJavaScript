@@ -57,10 +57,6 @@ export default class Group {
     }
 
     setTeams () {
-        // this.groupName.scheduleMatchDays[0][0].home
-
-        // const numberOfMatchDays = this.teams.length -1; // las jornadas son el numero de equipos -1 (en este caso ponemos - 2 ya que )
-        // const numberOfMatchesPerMatchday = this.teams.length / 2; //numero de partidos por jornada que son los equipos entre 2
         this.matchDaySchedule[1][1].home = this.teams[0].name;
         this.matchDaySchedule[2][0].home = this.teams[1].name;
         this.matchDaySchedule[0][1].home = this.teams[1].name;
@@ -73,7 +69,7 @@ export default class Group {
         this.matchDaySchedule[0][1].away = this.teams[2].name;
         this.matchDaySchedule[1][0].away = this.teams[2].name;
         this.matchDaySchedule[2][1].away = this.teams[0].name;
-        console.log (this.matchDaySchedule)
+        // console.log (this.matchDaySchedule)
     }
 
     generateGoals () {
@@ -84,6 +80,7 @@ export default class Group {
         for (const matchDay of this.matchDaySchedule) {
             for (const match of matchDay) {
                 const result = this.playGame(match)
+                console.log (`El resultado es ${result.homeTeamName} ${result.homeGoals} - ${result.awayTeamName} ${result.awayGoals}`)
             }
         }
 
@@ -93,8 +90,10 @@ export default class Group {
         const homeGoals = this.generateGoals();
         const awayGoals = this.generateGoals();
         return {
-            homeTeamName: match.home, homeGoals,
-            awayTeamName: match.away, awayGoals
+            homeTeamName: match.home, 
+            homeGoals: homeGoals,
+            awayTeamName: match.away, 
+            awayGoals: awayGoals
         }
 
     }
@@ -105,6 +104,7 @@ const configLeague = {
     pointsPerDraw: 1,
     pointsPerLose: 0,
 }
+
 
 export let groupA = new Group('groupA', configLeague);
 export let groupB = new Group('groupB', configLeague);
