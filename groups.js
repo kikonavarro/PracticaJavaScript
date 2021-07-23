@@ -4,20 +4,33 @@ import { dataTeams } from "./classes/teams.js";
 export default class Group {
     constructor (groupName, config = {}) {
         this.groupName = groupName;
-        this.teamNames =[] // array vacío que será rellenado cuando se haga el sorteo (riffle)
+        this.teams =[] // array vacío que será rellenado cuando se haga el sorteo (riffle)
         this.matchDaySchedule = []
         this.setup(config);
+        
+        
         // this.setupTeams(this.teamNames); //funciona solo con a?
     }
     riffle () {
-        while (this.teamNames.length < 4) {
-        let i = Math.floor(Math.random()*allTeams.length)
-        this.teamNames.push(allTeams[i])
-        allTeams.splice(i,1)
+        while (this.teams.length < 4) {
+        let i = Math.floor(Math.random()*dataTeams.length)
+        this.teams.push(dataTeams[i])
+        dataTeams.splice(i,1)
         
         }   
     }
 
+    getNames () {
+        this.names = []
+        this.teams.forEach(element => {
+            this.names.push(element.name)
+        });
+        return this.names
+    }
+        
+
+            
+        
     setup (config) {
         const defaultConfig = {
             pointsPerWin: 3,
@@ -27,24 +40,11 @@ export default class Group {
         this.config = Object.assign(defaultConfig, config)
         
     }
-    // setupTeams (teams) {
-    //     for (const teamName of teams) {
-    //         const team = {
-    //             name: teamName,
-    //             matchesWon: 0,
-    //             matchesDraw: 0,
-    //             matchesLost: 0,
-    //             golesFor: 0,
-    //             golesAgainst: 0,
-    //         }
-    //         this.teamNames.push(team)
-    //     }
-    // }
 
  
     scheduleMatchDays () { // funcion para pintar las jornadas
-        const numberOfMatchDays = this.teamNames.length -1; // las jornadas son el numero de equipos -1 (en este caso ponemos - 2 ya que )
-        const numberOfMatchesPerMatchday = this.teamNames.length / 2; //numero de partidos por jornada que son los equipos entre 2
+        const numberOfMatchDays = this.teams.length -1; // las jornadas son el numero de equipos -1 (en este caso ponemos - 2 ya que )
+        const numberOfMatchesPerMatchday = this.teams.length / 2; //numero de partidos por jornada que son los equipos entre 2
         
         for (let i=0; i<numberOfMatchDays; i++) {
             const matchDay = []
@@ -61,18 +61,18 @@ export default class Group {
 
         // const numberOfMatchDays = this.teams.length -1; // las jornadas son el numero de equipos -1 (en este caso ponemos - 2 ya que )
         // const numberOfMatchesPerMatchday = this.teams.length / 2; //numero de partidos por jornada que son los equipos entre 2
-        this.matchDaySchedule[1][1].home = this.teamNames[0];
-        this.matchDaySchedule[2][0].home = this.teamNames[1];
-        this.matchDaySchedule[0][1].home = this.teamNames[1];
-        this.matchDaySchedule[1][0].home = this.teamNames[3];
-        this.matchDaySchedule[0][0].home = this.teamNames[0];
-        this.matchDaySchedule[2][1].home = this.teamNames[2];
-        this.matchDaySchedule[1][1].away = this.teamNames[1];
-        this.matchDaySchedule[0][0].away = this.teamNames[3];
-        this.matchDaySchedule[2][0].away = this.teamNames[3];
-        this.matchDaySchedule[0][1].away = this.teamNames[2];
-        this.matchDaySchedule[1][0].away = this.teamNames[2];
-        this.matchDaySchedule[2][1].away = this.teamNames[0];
+        this.matchDaySchedule[1][1].home = this.teams[0].name;
+        this.matchDaySchedule[2][0].home = this.teams[1].name;
+        this.matchDaySchedule[0][1].home = this.teams[1].name;
+        this.matchDaySchedule[1][0].home = this.teams[3].name;
+        this.matchDaySchedule[0][0].home = this.teams[0].name;
+        this.matchDaySchedule[2][1].home = this.teams[2].name;
+        this.matchDaySchedule[1][1].away = this.teams[1].name;
+        this.matchDaySchedule[0][0].away = this.teams[3].name;
+        this.matchDaySchedule[2][0].away = this.teams[3].name;
+        this.matchDaySchedule[0][1].away = this.teams[2].name;
+        this.matchDaySchedule[1][0].away = this.teams[2].name;
+        this.matchDaySchedule[2][1].away = this.teams[0].name;
         console.log (this.matchDaySchedule)
     }
 

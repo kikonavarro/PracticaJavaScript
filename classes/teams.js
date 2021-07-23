@@ -58,7 +58,9 @@ equipos.forEach(element => {
     
         addGoals (goals) {
             this.goals += goals;
-        }
+        },
+
+
     }
     dataTeams.push(team)
 })
@@ -69,5 +71,5 @@ equipos.forEach(element => {
 
 
 
-console.log (dataTeams[1].name)
+
 
