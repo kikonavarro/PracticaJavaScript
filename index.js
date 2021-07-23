@@ -23,6 +23,7 @@ import {groupC} from "./groups.js"
 import {groupD} from "./groups.js"
 import {groupE} from "./groups.js"
 import {groupF} from "./groups.js"
+import {dataTeams} from "./classes/teams.js"
 
 
 // TODO Al arrancar el programa se deberá mostrar por pantalla la información de los equipos que hay en cada grupo y la planificación de partidos del mismo. ○Nombre del grupo ○Listado de los equipos (una en cada línea) 
@@ -37,12 +38,12 @@ groupF.riffle(allTeams)
 
 
 // Pintamos los grupos en pantalla
-console.log(`GrupoA: ${groupA.teams}`)
-console.log(`GrupoB: ${groupB.teams}`)
-console.log(`GrupoC: ${groupC.teams}`)
-console.log(`GrupoD: ${groupD.teams}`)
-console.log(`GrupoE: ${groupE.teams}`)
-console.log(`GrupoF: ${groupF.teams}`)
+console.log(`GrupoA: ${groupA.teamNames}`)
+console.log(`GrupoB: ${groupB.teamNames}`)
+console.log(`GrupoC: ${groupC.teamNames}`)
+console.log(`GrupoD: ${groupD.teamNames}`)
+console.log(`GrupoE: ${groupE.teamNames}`)
+console.log(`GrupoF: ${groupF.teamNames}`)
 
 
 groupA.scheduleMatchDays();
@@ -57,5 +58,26 @@ groupA.matchDaySchedule.forEach((matchDay, matchDayIndex) => {
     console.log(`=========================`)
 })
 
+groupA.start()
+console.log(groupA.matchDaySchedule)
 // TODO A continuación se mostrarán los resultados de los partidos y la clasificación de cada grupo tras el final de la primera jornada de partidos, después los de la segunda jornada, y finalmente los de la tercera jornada.
 // TODO Una vez finalice la fase de grupos, se deberán anunciar el comienzo de la fase de eliminatorias. 
+
+function setupTeams (names) {
+    for (let i = 0; i< names.length; i++) {
+        const team = {
+            name: names[i],
+            matchesWon: 0,
+            matchesDraw: 0,
+            matchesLost: 0,
+            golesFor: 0,
+            golesAgainst: 0,
+        }
+    
+    }
+}
+
+
+setupTeams(groupA.teamNames)
+console.log (groupA.teamNames)
+
