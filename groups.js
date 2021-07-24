@@ -169,6 +169,8 @@ export default class Group {
 
         return this.teams;
     }
+
+
 } 
 
 const configLeague = {

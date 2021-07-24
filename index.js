@@ -81,7 +81,46 @@ allGroups.forEach((element, index) => {
     });
 
 });
+//rellenar array con equipos clasificados, serán los primeros y segundos de cada grupo y los 4 mejores terceros
+let clasificatedTeams = [];
+let thirdClasificated = [];
+function getClasificated () {
+    allGroups.forEach(element => {
+        clasificatedTeams.push(element.teams[0])
+        clasificatedTeams.push(element.teams[1])
+        thirdClasificated.push(element.teams[2])
+    });
+    thirdClasificated.sort(function(teamA, teamB) {
 
+        if(teamA.points > teamB.points) {
+            return -1
+        } else if(teamA.points < teamB.points) {
+            return 1
+        } else {
+            const goalsDiffA = teamA.goalsFor - teamA.goalsAgainst; 
+            const goalsDiffB = teamB.goalsFor - teamB.goalsAgainst; 
+            if (goalsDiffA > goalsDiffB) {
+                return -1
+            } else if( goalsDiffA < goalsDiffB) {
+                return 1
+            } else {
+                if (teamA.name.localeCompare(teamB.name) === -1) {
+                return -1
+                } else {
+                    return 1
+                }
+
+            }
+        } 
+    })
+    clasificatedTeams.push(thirdClasificated[0])
+    clasificatedTeams.push(thirdClasificated[1])
+    clasificatedTeams.push(thirdClasificated[2])
+    clasificatedTeams.push(thirdClasificated[3])
+}
+
+getClasificated()
+console.log (clasificatedTeams)
 
 
 
