@@ -29,14 +29,18 @@ import {dataTeams} from "./classes/teams.js"
 // TODO Al arrancar el programa se deberá mostrar por pantalla la información de los equipos que hay en cada grupo y la planificación de partidos del mismo. ○Nombre del grupo ○Listado de los equipos (una en cada línea) 
 // Instanciamos los grupos y llamamos a la función riffle para sortear los equipos de cada grupo y hacerlo de manera aleatoria (La asignación de los equipos a cada grupo se realizará de manera aleatoria.)
 
+
 let allGroups = [groupA, groupB, groupC, groupD, groupE, groupF]
 allGroups.forEach((element, index) => {
     element.riffle()
     console.log(`\n`);
-    console.log(`${element.groupName}: ${element.getNames()}`)
+    console.log(`${element.groupName}: ` )
+    element.getNames().forEach (teamName => {
+    console.log(teamName)});
     console.log(`\n`);
     element.scheduleMatchDays();
     element.setTeams();
+    element.start();
 
     element.matchDaySchedule.forEach((matchDay, matchDayIndex) => {
         console.log(`JORNADA ${matchDayIndex+1}`)
@@ -44,14 +48,41 @@ allGroups.forEach((element, index) => {
             
                 console.log(`${match.home} vs ${match.away}`);
             })
+            
             console.log(`=========================`)
+
         })
-    console.log(`\n`);    
-    element.start();
+    element.summaries.forEach((summary, matchDayIndex) => {
+        // mostramos los resultados
+        console.log(`Resultados Jornada ${matchDayIndex + 1}`);
+        summary.results.forEach((result) => {
+            console.log(`${result.homeTeamName} vs ${result.awayTeamName} : ${result.homeGoals} - ${result.awayGoals}`);
+            
+            
+        });
+        const standing = summary.standings.map((team) => {
+            return {
+                Team: team.name,
+                Points: team.points,
+                PG: team.matchesWon + team.matchesLost + team.matchesDraw,
+                WG: team.matchesWon,
+                DG: team.matchesDraw,
+                LG: team.matchesLost,
+                GoalsF: team.goalsFor,
+                GoalsA: team.goalsAgainst,
+                GoalsDiff: team.goalsFor - team.goalsAgainst,
+            };
+        });
+
+        console.table(standing);
+        
+        
+
+    });
 
 });
 
-console.log(groupA.teams)
+
 
 
 
@@ -90,5 +121,4 @@ console.log(groupA.teams)
 
 
 // TODO A continuación se mostrarán los resultados de los partidos y la clasificación de cada grupo tras el final de la primera jornada de partidos, después los de la segunda jornada, y finalmente los de la tercera jornada.
-// TODO Una vez finalice la fase de grupos, se deberán anunciar el comienzo de la fase de eliminatorias. 
-
+// TODO Una vez finalice la fase de grupos, se deberán anunciar el comienzo de la fase de eliminatorias.

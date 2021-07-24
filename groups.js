@@ -7,9 +7,8 @@ export default class Group {
         this.teams =[] // array vacío que será rellenado cuando se haga el sorteo (riffle)
         this.matchDaySchedule = []
         this.setup(config);
+        this.summaries = [];
         
-        
-        // this.setupTeams(this.teamNames); //funciona solo con a?
     }
     riffle () {
         while (this.teams.length < 4) {
@@ -27,9 +26,6 @@ export default class Group {
         });
         return this.names
     }
-        
-
-            
         
     setup (config) {
         const defaultConfig = {
@@ -69,20 +65,29 @@ export default class Group {
         this.matchDaySchedule[0][1].away = this.teams[2].name;
         this.matchDaySchedule[1][0].away = this.teams[2].name;
         this.matchDaySchedule[2][1].away = this.teams[0].name;
-        // console.log (this.matchDaySchedule)
+       
     }
 
     generateGoals () {
-        return Math.floor(Math.random()*10)
+        return Math.floor(Math.random()*6)
     }
 
     start () {
         for (const matchDay of this.matchDaySchedule) {
+            const matchDaySummary = {
+                results : [],
+                standings : undefined,
+            }
             for (const match of matchDay) {
                 const result = this.playGame(match)
                 this.updateTeams(result)
-                console.log (`El resultado es ${result.homeTeamName} ${result.homeGoals} - ${result.awayTeamName} ${result.awayGoals}`)
+                matchDaySummary.results.push(result)
+                // console.log (`El resultado es ${result.homeTeamName} ${result.homeGoals} - ${result.awayTeamName} ${result.awayGoals}`)
             }
+            
+            matchDaySummary.standings = this.getStandings().map(team => Object.assign({}, team));;
+            this.summaries.push(matchDaySummary);
+            // console.log (matchDaySummary)
         }
     
     }
@@ -99,17 +104,6 @@ export default class Group {
         }
         
     }
-
-    // updateTeams (result) {
-    //     this.teams.forEach(element => {
-    //         if (this.teams.name = result.homeTeamName) {
-    //             goalsFor += homeGoals;
-    //             goalsAgaints += awayGoals;
-    //         }
-            
-    //     });
-
-    // }
 
     getTeamByName(name) {
         return this.teams.find(team => team.name === name);
@@ -150,6 +144,7 @@ export default class Group {
     getStandings(){
         // -1, 0, 1
         this.teams.sort(function(teamA, teamB) {
+
             if(teamA.points > teamB.points) {
                 return -1
             } else if(teamA.points < teamB.points) {
@@ -162,10 +157,15 @@ export default class Group {
                 } else if( goalsDiffA < goalsDiffB) {
                     return 1
                 } else {
-                    return 0
+                    if (teamA.name.localeCompare(teamB.name) === -1) {
+                    return -1
+                    } else {
+                        return 1
+                    }
+
                 }
-            }
-        })
+            } 
+    })
 
         return this.teams;
     }
@@ -178,11 +178,11 @@ const configLeague = {
 }
 
 
-export let groupA = new Group('groupA', configLeague);
-export let groupB = new Group('groupB', configLeague);
-export let groupC = new Group('groupC', configLeague);
-export let groupD = new Group('groupD', configLeague);
-export let groupE = new Group('groupE', configLeague);
-export let groupF = new Group('groupF', configLeague);
+export let groupA = new Group('Grupo A', configLeague);
+export let groupB = new Group('Grupo B', configLeague);
+export let groupC = new Group('Grupo C', configLeague);
+export let groupD = new Group('Grupo D', configLeague);
+export let groupE = new Group('Grupo E', configLeague);
+export let groupF = new Group('Grupo F', configLeague);
 
 
