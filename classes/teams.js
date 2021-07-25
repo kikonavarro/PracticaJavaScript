@@ -40,6 +40,7 @@ equipos.forEach(element => {
         goalsFor: 0,
         goalsAgainst: 0,
         points: 0
+        
 
         // addWins (wins) {
         //     this.wins += wins;

@@ -83,11 +83,16 @@ allGroups.forEach((element, index) => {
 });
 //rellenar array con equipos clasificados, serán los primeros y segundos de cada grupo y los 4 mejores terceros
 let clasificatedTeams = [];
-let thirdClasificated = [];
+export let firstClasificated = [];
+let secondClasificated = [];
+let thirdClasificated = []
+
+export let bestThirdClasificated = [];
 function getClasificated () {
     allGroups.forEach(element => {
-        clasificatedTeams.push(element.teams[0])
-        clasificatedTeams.push(element.teams[1])
+        element.addGroupName();
+        firstClasificated.push(element.teams[0])
+        secondClasificated.push(element.teams[1])
         thirdClasificated.push(element.teams[2])
     });
     thirdClasificated.sort(function(teamA, teamB) {
@@ -113,51 +118,67 @@ function getClasificated () {
             }
         } 
     })
-    clasificatedTeams.push(thirdClasificated[0])
-    clasificatedTeams.push(thirdClasificated[1])
-    clasificatedTeams.push(thirdClasificated[2])
-    clasificatedTeams.push(thirdClasificated[3])
 }
 
 getClasificated()
-console.log (clasificatedTeams)
+
+function getClasificatedNames (clasificated) {
+    for (let i=0; i<clasificated.length; i++){
+        console.log(clasificated[i].name)
+    }
+}
+bestThirdClasificated.push(thirdClasificated[0], thirdClasificated[1], thirdClasificated[2], thirdClasificated[4])
 
 
 
 
-// allGroups[0].riffle()
-// groupB.riffle()
-// groupC.riffle()
-// groupD.riffle()
-// groupE.riffle()
-// groupF.riffle()
 
 
-// Pintamos los grupos en pantalla
-// console.log(`GrupoA: ${groupA.getNames()}`)
-// console.log(`GrupoB: ${groupB.getNames()}`)
-// console.log(`GrupoC: ${groupC.getNames()}`)
-// console.log(`GrupoD: ${groupD.getNames()}`)
-// console.log(`GrupoE: ${groupE.getNames()}`)
-// console.log(`GrupoF: ${groupF.getNames()}`)
+//función para sacar los grupos de los elementos de los arrays 
+function getGroup (teams) {
+    let groups = []
+    teams.forEach(element => {
+        groups.push(element.group)
+    });
+    return groups
+}
+
+// sacamos los grupos de los equipos clasificados como terceros y como segundos
+let group3 = getGroup (bestThirdClasificated)
+getGroup (bestThirdClasificated)
+console.log (group3)
+let group2 = getGroup (secondClasificated)
+console.log (group2)
+
+//comparamos los grupos de los equipos segundos y terceros para obtener los segundos que no se haya clasificado ningún tercero
+
+let secondWithOutthird = []
+function findGroupRep ()
+{
+    group2.forEach (element => {
+        if (group3.indexOf(element) === -1) {
+            secondWithOutthird.push (element)
+        }
+
+    })
+}
+findGroupRep();
+console.log (secondWithOutthird)
 
 
-// groupA.scheduleMatchDays();
-// groupA.setTeams();
 
-// groupA.matchDaySchedule.forEach((matchDay, matchDayIndex) => {
-//     console.log(`JORNADA ${matchDayIndex+1}`)
-//     matchDay.forEach(match => {
-        
-//             console.log(`${match.home} vs ${match.away}`);
-//     })
-//     console.log(`=========================`)
-// })
+export let secondWithThirdTeams = []
+export let secondWithOutthirdTeams = []
+secondClasificated.forEach(element => {
+    if (element.group === secondWithOutthird[0] || element.group == secondWithOutthird [1]) {
+        secondWithOutthirdTeams.push(element)
+    } else {
+        secondWithThirdTeams.push(element)
+    }
+});
 
-// groupA.start()
-
-
-
+console.log (secondWithOutthirdTeams)
+console.log (secondWithThirdTeams)
 
 // TODO A continuación se mostrarán los resultados de los partidos y la clasificación de cada grupo tras el final de la primera jornada de partidos, después los de la segunda jornada, y finalmente los de la tercera jornada.
 // TODO Una vez finalice la fase de grupos, se deberán anunciar el comienzo de la fase de eliminatorias.

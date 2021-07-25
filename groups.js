@@ -15,9 +15,16 @@ export default class Group {
         let i = Math.floor(Math.random()*dataTeams.length)
         this.teams.push(dataTeams[i])
         dataTeams.splice(i,1)
-        
-        }   
+        }
+         
     }
+
+    addGroupName () {
+        this.teams.forEach(element => {
+            element.group = this.groupName        
+        });
+    }
+    
 
     getNames () {
         this.names = []
