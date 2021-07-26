@@ -102,24 +102,46 @@ class Round {
         
     // }
 
-    getWinner () {
+    getWinner (match) {
         
         let result = {
-            homeGoals : match.home.this.generateGoals(),
-            awayGoals : match.away.this.generateGoals()
+            homeGoals : this.generateGoals(),
+            awayGoals : this.generateGoals()
         }
-        let winner = undefined;
-        if (homeGoals> awayGoals) {
+        let winner = [];
+        do {
+        if (result.homeGoals > result.awayGoals) {
             winner = match.home    
-        } else if (homerGoals < awayGoals) {
+        } else if (result.homeGoals < result.awayGoals) {
             winner = match.away
         } else {
             //en caso de empate repetimos la generación de goles de un equipo
-            while (result.homeGoals = result.awayGoals){
-            result.homeGoals = teamA.this.generateGoals()
-            }
+            result.homeGoals = this.generateGoals()
+            if (result.homeGoals > result.awayGoals) {
+                winner = match.home 
+            } else  {
+                    winner = match.away
+            }   
+            
+            
         }
-        return winner;
+        } while (result.homeGoals == result.awayGoals)
+
+        // let winner = [];
+        // if (result.homeGoals > result.awayGoals) {
+        //     winner = match.home    
+        // } else if (result.homeGoals < result.awayGoals) {
+        //     winner = match.away
+        // } else {
+        //     //en caso de empate repetimos la generación de goles de un equipo
+        //     do {
+        //     result.homeGoals = this.generateGoals()
+        //     } while (result.homeGoals == result.awayGoals)
+            
+            
+        // }
+        
+        console.log (`${match.home.name} ${result.homeGoals} - ${match.away.name} ${result.awayGoals} => ${winner.name}`)
 
     }
 
@@ -136,3 +158,10 @@ console.log ('******************************')
 
 // console.log(roundOfeight.matchs)
 roundOfEight.printNameAndGroup()
+
+
+// roundOfEight.getWinner(roundOfEight.matchs[0])
+
+roundOfEight.matchs.forEach(element => {
+    roundOfEight.getWinner(element)
+});

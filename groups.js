@@ -76,7 +76,7 @@ export default class Group {
     }
 
     generateGoals () {
-        return Math.floor(Math.random()*1)
+        return Math.floor(Math.random()*5)
     }
 
     start () {
