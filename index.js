@@ -109,7 +109,7 @@ function getClasificated () {
             } else if( goalsDiffA < goalsDiffB) {
                 return 1
             } else {
-                if (teamA.name.localeCompare(teamB.name) === -1) {
+                if (String(teamA.name).localeCompare(String(teamB.name)) === -1) {
                 return -1
                 } else {
                     return 1
@@ -127,7 +127,7 @@ function getClasificatedNames (clasificated) {
         console.log(clasificated[i].name)
     }
 }
-bestThirdClasificated.push(thirdClasificated[0], thirdClasificated[1], thirdClasificated[2], thirdClasificated[4])
+bestThirdClasificated.push(thirdClasificated[0], thirdClasificated[1], thirdClasificated[2], thirdClasificated[3])
 
 
 

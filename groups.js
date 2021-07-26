@@ -76,7 +76,7 @@ export default class Group {
     }
 
     generateGoals () {
-        return Math.floor(Math.random()*6)
+        return Math.floor(Math.random()*1)
     }
 
     start () {
@@ -164,7 +164,7 @@ export default class Group {
                 } else if( goalsDiffA < goalsDiffB) {
                     return 1
                 } else {
-                    if (teamA.name.localeCompare(teamB.name) === -1) {
+                    if (String(teamA.name).localeCompare(String(teamB.name)) === -1) {
                     return -1
                     } else {
                         return 1
