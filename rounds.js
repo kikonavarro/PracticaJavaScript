@@ -8,9 +8,11 @@ import { bestThirdClasificated } from "./index.js"
 function shuffle(array) {
     array.sort(() => Math.random() - 0.5);
   }
-class Round {
-    constructor () {
-        
+export class Round {
+    constructor (name) {
+        this.name = name;
+        this.winners = [];
+        this.loosers = [];
         // this.playGame()
 
     }
@@ -91,16 +93,6 @@ class Round {
         return Math.floor(Math.random()*6)
     }
 
-    // playGame (match) {
-    //     const homeGoals = this.generateGoals();
-    //     const awayGoals = this.generateGoals();
-    //     return {
-    //         homeGoals: homeGoals,
-    //         awayGoals: awayGoals
-        
-    //     }
-        
-    // }
 
     getWinner (match) {
         
@@ -109,37 +101,33 @@ class Round {
             awayGoals : this.generateGoals()
         }
         let winner = [];
+        let looser =[];
         do {
         if (result.homeGoals > result.awayGoals) {
-            winner = match.home    
+            winner = match.home
+            looser = match.away    
         } else if (result.homeGoals < result.awayGoals) {
             winner = match.away
+            looser = match.home
         } else {
             //en caso de empate repetimos la generación de goles de un equipo
             result.homeGoals = this.generateGoals()
             if (result.homeGoals > result.awayGoals) {
-                winner = match.home 
+                winner = match.home
+                looser = match.away    
+
             } else  {
                     winner = match.away
-            }   
+                    looser = match.home
+            }       
             
             
         }
         } while (result.homeGoals == result.awayGoals)
 
-        // let winner = [];
-        // if (result.homeGoals > result.awayGoals) {
-        //     winner = match.home    
-        // } else if (result.homeGoals < result.awayGoals) {
-        //     winner = match.away
-        // } else {
-        //     //en caso de empate repetimos la generación de goles de un equipo
-        //     do {
-        //     result.homeGoals = this.generateGoals()
-        //     } while (result.homeGoals == result.awayGoals)
-            
-            
-        // }
+        this.winners.push(winner)
+        this.loosers.push(looser)
+
         
         console.log (`${match.home.name} ${result.homeGoals} - ${match.away.name} ${result.awayGoals} => ${winner.name}`)
 
@@ -161,7 +149,11 @@ roundOfEight.printNameAndGroup()
 
 
 // roundOfEight.getWinner(roundOfEight.matchs[0])
-
+console.log ('==== OCTAVOS DE FINAL ====')
 roundOfEight.matchs.forEach(element => {
     roundOfEight.getWinner(element)
 });
+
+
+export let nextRound = roundOfEight.winners
+
