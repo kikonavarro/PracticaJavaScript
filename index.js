@@ -1,18 +1,3 @@
-// El programa comenzará indicando con un mensaje que “comienza el torneo”.
-
-console.log("COMIENZA EL TORNEO");
-
-// TODO El programa deberá mostrar los 16 equipos participantes en la fase de eliminatorias (play off).
-// TODO A continuación se deberán mostrar los resultados de los partidos en las diferentes rondas (octavos de final, cuartos de final y semifinales), indicando qué equipos se clasifican para la siguiente ronda (esto se mostrará desde octavos de final hasta semifinales).
-// TODO Opcional: Una vez finalizadas las semifinales, se mostrará el resultado del partido de tercer y cuarto puesto (que se juega entre equipos no clasificados para la final).
-// TODO Tras esto, se mostrará el resultado del partido de la final, anunciando posteriormente el equipo ganador como campeón del mundo.
-
-// let europeTeams = ['Italia', 'España', 'Suiza', 'Dinamarca', 'Suecia', 'Francia', 'Alemania', 'Inglaterra', 'Holanda', 'Eslovenia', 'Portugal', 'República Checa']
-
-// Mostrar los equipos inscritos en pantalla
-// europeTeams.forEach(element => {
-//     console.log(element)
-// });
 
 import allTeams from "./groups.js";
 import Group from "./groups.js";
@@ -24,14 +9,13 @@ import { groupE } from "./groups.js";
 import { groupF } from "./groups.js";
 import { dataTeams } from "./classes/teams.js";
 
-// TODO Al arrancar el programa se deberá mostrar por pantalla la información de los equipos que hay en cada grupo y la planificación de partidos del mismo. ○Nombre del grupo ○Listado de los equipos (una en cada línea)
-// Instanciamos los grupos y llamamos a la función riffle para sortear los equipos de cada grupo y hacerlo de manera aleatoria (La asignación de los equipos a cada grupo se realizará de manera aleatoria.)
+console.log("*******************\nCOMIENZA EL TORNEO\n*******************\n");
+console.log(`Grupos y equipos\n=================\n`);
 
 let allGroups = [groupA, groupB, groupC, groupD, groupE, groupF];
 allGroups.forEach((element, index) => {
 	element.riffle();
-	console.log(`\n`);
-	console.log(`${element.groupName}: `);
+	console.log(`${element.groupName}\n________________`);
 	element.getNames().forEach((teamName) => {
 		console.log(teamName);
 	});
@@ -39,45 +23,22 @@ allGroups.forEach((element, index) => {
 	element.scheduleMatchDays();
 	element.setTeams();
 	element.start();
-
 	element.matchDaySchedule.forEach((matchDay, matchDayIndex) => {
 		console.log(`JORNADA ${matchDayIndex + 1}`);
 		matchDay.forEach((match) => {
 			console.log(`${match.home} vs ${match.away}`);
 		});
 
-		console.log(`=========================`);
+		console.log(`=========================\n`);
 	});
-	// element.summaries.forEach((summary, matchDayIndex) => {
-	// 	// mostramos los resultados
-	// 	console.log(`Resultados Jornada ${matchDayIndex + 1}`);
-	// 	summary.results.forEach((result) => {
-	// 		console.log(
-	// 			`${result.homeTeamName} vs ${result.awayTeamName} : ${result.homeGoals} - ${result.awayGoals}`
-	// 		);
-	// 	});
-	// 	const standing = summary.standings.map((team) => {
-	// 		return {
-	// 			Team: team.name,
-	// 			Points: team.points,
-	// 			PG: team.matchesWon + team.matchesLost + team.matchesDraw,
-	// 			WG: team.matchesWon,
-	// 			DG: team.matchesDraw,
-	// 			LG: team.matchesLost,
-	// 			GoalsF: team.goalsFor,
-	// 			GoalsA: team.goalsAgainst,
-	// 			GoalsDiff: team.goalsFor - team.goalsAgainst,
-	// 		};
-	// 	});
-
-	// 	console.table(standing);
-	// });
 });
+
+console.log("********************************\n******COMIENZA LA EUROCOPA******\n********************************\n");
 
 function showResults() {
 	for (let i = 0; i < 3; i++) {
 		allGroups.forEach((element) => {
-			console.log(`${element.groupName} - Jornada ${i + 1}`);
+			console.log(`${element.groupName} - Jornada ${i + 1}\n___________________`);
 			element.summaries[i].results.forEach((result) => {
 				console.log(
 					`${result.homeTeamName} vs ${result.awayTeamName} : ${result.homeGoals} - ${result.awayGoals}`
@@ -142,12 +103,13 @@ function getClasificated() {
 }
 
 getClasificated();
+console.log("************************************************\n******COMIENZO DE LA FASE DE ELIMINATORIAS******\n************************************************\n");
 
-function getClasificatedNames(clasificated) {
-	for (let i = 0; i < clasificated.length; i++) {
-		console.log(clasificated[i].name);
-	}
-}
+// function getClasificatedNames(clasificated) {
+// 	for (let i = 0; i < clasificated.length; i++) {
+// 		console.log(clasificated[i].name);
+// 	}
+// }
 bestThirdClasificated.push(
 	thirdClasificated[0],
 	thirdClasificated[1],
@@ -167,9 +129,9 @@ function getGroup(teams) {
 // sacamos los grupos de los equipos clasificados como terceros y como segundos
 let group3 = getGroup(bestThirdClasificated);
 getGroup(bestThirdClasificated);
-console.log(group3);
+// console.log(group3);
 let group2 = getGroup(secondClasificated);
-console.log(group2);
+// console.log(group2);
 
 //comparamos los grupos de los equipos segundos y terceros para obtener los segundos que no se haya clasificado ningún tercero
 
@@ -182,7 +144,7 @@ function findGroupRep() {
 	});
 }
 findGroupRep();
-console.log(secondWithOutthird);
+// console.log(secondWithOutthird);
 
 export let secondWithThirdTeams = [];
 export let secondWithOutthirdTeams = [];
@@ -197,8 +159,6 @@ secondClasificated.forEach((element) => {
 	}
 });
 
-console.log(secondWithOutthirdTeams);
-console.log(secondWithThirdTeams);
+// console.log(secondWithOutthirdTeams);
+// console.log(secondWithThirdTeams);
 
-// TODO A continuación se mostrarán los resultados de los partidos y la clasificación de cada grupo tras el final de la primera jornada de partidos, después los de la segunda jornada, y finalmente los de la tercera jornada.
-// TODO Una vez finalice la fase de grupos, se deberán anunciar el comienzo de la fase de eliminatorias.

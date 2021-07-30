@@ -50,9 +50,9 @@ class NextRound extends Round {
 	}
 }
 
-console.log("==== CUARTOS DE FINAL ====");
+console.log("\n======= CUARTOS DE FINAL =======\n");
 const roundOfFour = new NextRound("roundOfFour", nextRound);
-console.log(roundOfFour.teams);
+// console.log(roundOfFour.teams);
 roundOfFour.setMatchs();
 roundOfFour.selectTeams();
 roundOfFour.matchs.forEach((element) => {
@@ -61,11 +61,11 @@ roundOfFour.matchs.forEach((element) => {
 
 export let semifinalClasificated = roundOfFour.winners;
 
-console.log("==== SEMIFINALES ====");
+console.log("\n======= SEMIFINALES =======\n");
 const semiFinal = new NextRound("semiFinal", semifinalClasificated);
 semiFinal.setMatchs();
 semiFinal.selectTeamsForSemis();
-console.log(semiFinal.matchs);
+// console.log(semiFinal.matchs);
 semiFinal.matchs.forEach((element) => {
 	semiFinal.getWinner(element);
 });
@@ -73,7 +73,7 @@ semiFinal.matchs.forEach((element) => {
 export let finalClasificated = semiFinal.winners;
 export let consolationClasificated = semiFinal.loosers;
 
-console.log("==== TERCER Y CUARTO PUESTO ====");
+console.log("\n======= TERCER Y CUARTO PUESTO =======\n");
 const consolation = new NextRound("consolacion", consolationClasificated);
 consolation.setMatchs();
 consolation.selectTeams();
@@ -81,10 +81,12 @@ consolation.matchs.forEach((element) => {
 	consolation.getWinner(element);
 });
 
-console.log("==== FINAL ====");
+console.log("\n========== FINAL ==========\n");
 const final = new NextRound("final", finalClasificated);
 final.setMatchs();
 final.selectTeams();
 final.matchs.forEach((element) => {
 	final.getWinner(element);
 });
+export let champion = final.winners;
+console.log (`\n=====================================\n${champion[0].name} CAMPEONA DE LA EURO!\n=====================================`)
