@@ -1,5 +1,4 @@
-export let allTeams = ['Italia', 'Gales', 'Turquía', 'España', 'Suiza', 'Bélgica', 'Finlandia', 'Dinamarca', 'Rusia', 'Austria', 'Ucrania', 'Macedonia', 'Suecia', 'Croacia', 'Escocia', 'Eslovaquia', 'Polonia', 'Hungria', 'Francia', 'Alemania', 'Inglaterra', 'Holanda', 'Portugal', 'República Checa']
-import { dataTeams } from "./classes/teams.js";
+import { dataTeams } from "./teams.js";
 
 export default class Group {
     constructor (groupName, config = {}) {
@@ -18,14 +17,11 @@ export default class Group {
         }
          
     }
-
     addGroupName () {
         this.teams.forEach(element => {
             element.group = this.groupName        
         });
     }
-    
-
     getNames () {
         this.names = []
         this.teams.forEach(element => {

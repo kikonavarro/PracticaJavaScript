@@ -1,17 +1,17 @@
 
-import allTeams from "./groups.js";
-import Group from "./groups.js";
 import { groupA } from "./groups.js";
 import { groupB } from "./groups.js";
 import { groupC } from "./groups.js";
 import { groupD } from "./groups.js";
 import { groupE } from "./groups.js";
 import { groupF } from "./groups.js";
-import { dataTeams } from "./classes/teams.js";
+import { Round } from "./firstRound.js"
 
 console.log("*******************\nCOMIENZA EL TORNEO\n*******************\n");
 console.log(`Grupos y equipos\n=================\n`);
 
+
+//sorteamos los equipos para cada grupo y pintamos las jornadas
 let allGroups = [groupA, groupB, groupC, groupD, groupE, groupF];
 allGroups.forEach((element, index) => {
 	element.riffle();
@@ -34,7 +34,7 @@ allGroups.forEach((element, index) => {
 });
 
 console.log("********************************\n******COMIENZA LA EUROCOPA******\n********************************\n");
-
+//función que muestra los resultados de cada jornada y cada grupo incluyendo la clasificación
 function showResults() {
 	for (let i = 0; i < 3; i++) {
 		allGroups.forEach((element) => {
@@ -63,6 +63,7 @@ function showResults() {
 }
 
 showResults();
+
 //rellenar array con equipos clasificados, serán los primeros y segundos de cada grupo y los 4 mejores terceros
 let clasificatedTeams = [];
 export let firstClasificated = [];
@@ -105,11 +106,7 @@ function getClasificated() {
 getClasificated();
 console.log("************************************************\n******COMIENZO DE LA FASE DE ELIMINATORIAS******\n************************************************\n");
 
-// function getClasificatedNames(clasificated) {
-// 	for (let i = 0; i < clasificated.length; i++) {
-// 		console.log(clasificated[i].name);
-// 	}
-// }
+
 bestThirdClasificated.push(
 	thirdClasificated[0],
 	thirdClasificated[1],
@@ -129,9 +126,8 @@ function getGroup(teams) {
 // sacamos los grupos de los equipos clasificados como terceros y como segundos
 let group3 = getGroup(bestThirdClasificated);
 getGroup(bestThirdClasificated);
-// console.log(group3);
 let group2 = getGroup(secondClasificated);
-// console.log(group2);
+
 
 //comparamos los grupos de los equipos segundos y terceros para obtener los segundos que no se haya clasificado ningún tercero
 
@@ -144,7 +140,7 @@ function findGroupRep() {
 	});
 }
 findGroupRep();
-// console.log(secondWithOutthird);
+
 
 export let secondWithThirdTeams = [];
 export let secondWithOutthirdTeams = [];
@@ -159,6 +155,50 @@ secondClasificated.forEach((element) => {
 	}
 });
 
-// console.log(secondWithOutthirdTeams);
-// console.log(secondWithThirdTeams);
+import { roundOfEight } from "./firstRound.js"
+import { roundOfFour } from "./nextRounds.js" 
+import { semiFinal } from "./nextRounds.js"
+import { consolation } from "./nextRounds.js"
+import { final } from "./nextRounds.js"
+import { champion } from "./nextRounds.js"
 
+console.log("====== OCTAVOS DE FINAL ======\n");
+roundOfEight.setlocalTeamsForEight();
+roundOfEight.setAwayTeamsForEight();
+roundOfEight.setMatchs();
+roundOfEight.selectLocalTeamsInMatch();
+roundOfEight.selectAwayTeamsInMatch();
+roundOfEight.matchs.forEach((element) => {
+	roundOfEight.getWinner(element);
+});
+
+export let nextRound = roundOfEight.winners;
+console.log("\n======= CUARTOS DE FINAL =======\n");
+roundOfFour.setMatchs();
+roundOfFour.selectTeams();
+roundOfFour.matchs.forEach((element) => {
+	roundOfFour.getWinner(element);
+});
+
+console.log("\n======= SEMIFINALES =======\n");
+semiFinal.setMatchs();
+semiFinal.selectTeamsForSemis();
+semiFinal.matchs.forEach((element) => {
+	semiFinal.getWinner(element);
+});
+
+console.log("\n======= TERCER Y CUARTO PUESTO =======\n");
+consolation.setMatchs();
+consolation.selectTeams();
+consolation.matchs.forEach((element) => {
+	consolation.getWinner(element);
+});
+
+console.log("\n========== FINAL ==========\n");
+final.setMatchs();
+final.selectTeams();
+final.matchs.forEach((element) => {
+	final.getWinner(element);
+});
+
+console.log (`\n=====================================\n${champion[0].name} CAMPEONA DE LA EURO!\n=====================================`)

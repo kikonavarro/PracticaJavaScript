@@ -11,7 +11,6 @@ export class Round {
 		this.name = name;
 		this.winners = [];
 		this.loosers = [];
-		// this.playGame()
 	}
 
 	setlocalTeamsForEight() {
@@ -22,8 +21,6 @@ export class Round {
 		for (let x = secondWithOutthirdTeams.length - 1; x >= 0; x--) {
 			this.localTeamsForEight.push(secondWithOutthirdTeams[x]);
 		}
-		// console.log("mostrar los equipos locales para octavos");
-		// console.log(this.localTeamsForEight);
 	}
 
 	setAwayTeamsForEight() {
@@ -34,8 +31,6 @@ export class Round {
 		for (let j = 0; j < secondWithThirdTeams.length; j++) {
 			this.awayTeamsForEight.push(secondWithThirdTeams[j]);
 		}
-		// console.log("mostrar los equipos visitantes para octavos");
-		// console.log(this.awayTeamsForEight);
 	}
 
 	// pintamos los 8 partidos creando un array en el que hay 2 equipos por partido, local y visitante
@@ -76,13 +71,6 @@ export class Round {
 			this.matchs[i].away = this.awayTeamsForEight[i];
 		}
 	}
-	// printNameAndGroup() {
-	// 	this.matchs.forEach((element) => {
-	// 		console.log(
-	// 			`${element.home.name} ${element.home.group}  VS ${element.away.name} ${element.away.group}`
-	// 		);
-	// 	});
-	// }
 
 	generateGoals() {
 		return Math.floor(Math.random() * 6);
@@ -124,22 +112,17 @@ export class Round {
 	}
 }
 
-let roundOfEight = new Round("Octavos");
+export let roundOfEight = new Round("Octavos");
 
-roundOfEight.setlocalTeamsForEight();
-roundOfEight.setAwayTeamsForEight();
-roundOfEight.setMatchs();
-roundOfEight.selectLocalTeamsInMatch();
-roundOfEight.selectAwayTeamsInMatch();
+// roundOfEight.setlocalTeamsForEight();
+// roundOfEight.setAwayTeamsForEight();
+// roundOfEight.setMatchs();
+// roundOfEight.selectLocalTeamsInMatch();
+// roundOfEight.selectAwayTeamsInMatch();
 
-
-// console.log(roundOfeight.matchs)
-// roundOfEight.printNameAndGroup();
-
-// roundOfEight.getWinner(roundOfEight.matchs[0])
-console.log("====== OCTAVOS DE FINAL ======\n");
-roundOfEight.matchs.forEach((element) => {
-	roundOfEight.getWinner(element);
-});
+// console.log("====== OCTAVOS DE FINAL ======\n");
+// roundOfEight.matchs.forEach((element) => {
+// 	roundOfEight.getWinner(element);
+// });
 
 export let nextRound = roundOfEight.winners;
