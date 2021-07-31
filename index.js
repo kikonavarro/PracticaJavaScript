@@ -1,15 +1,12 @@
-
 import { groupA } from "./groups.js";
 import { groupB } from "./groups.js";
 import { groupC } from "./groups.js";
 import { groupD } from "./groups.js";
 import { groupE } from "./groups.js";
 import { groupF } from "./groups.js";
-import { Round } from "./firstRound.js"
 
 console.log("*******************\nCOMIENZA EL TORNEO\n*******************\n");
 console.log(`Grupos y equipos\n=================\n`);
-
 
 //sorteamos los equipos para cada grupo y pintamos las jornadas
 let allGroups = [groupA, groupB, groupC, groupD, groupE, groupF];
@@ -33,12 +30,16 @@ allGroups.forEach((element, index) => {
 	});
 });
 
-console.log("********************************\n******COMIENZA LA EUROCOPA******\n********************************\n");
+console.log(
+	"********************************\n******COMIENZA LA EUROCOPA******\n********************************\n"
+);
 //función que muestra los resultados de cada jornada y cada grupo incluyendo la clasificación
 function showResults() {
 	for (let i = 0; i < 3; i++) {
 		allGroups.forEach((element) => {
-			console.log(`${element.groupName} - Jornada ${i + 1}\n___________________`);
+			console.log(
+				`${element.groupName} - Jornada ${i + 1}\n___________________`
+			);
 			element.summaries[i].results.forEach((result) => {
 				console.log(
 					`${result.homeTeamName} vs ${result.awayTeamName} : ${result.homeGoals} - ${result.awayGoals}`
@@ -104,8 +105,9 @@ function getClasificated() {
 }
 
 getClasificated();
-console.log("************************************************\n******COMIENZO DE LA FASE DE ELIMINATORIAS******\n************************************************\n");
-
+console.log(
+	"************************************************\n******COMIENZO DE LA FASE DE ELIMINATORIAS******\n************************************************\n"
+);
 
 bestThirdClasificated.push(
 	thirdClasificated[0],
@@ -128,7 +130,6 @@ let group3 = getGroup(bestThirdClasificated);
 getGroup(bestThirdClasificated);
 let group2 = getGroup(secondClasificated);
 
-
 //comparamos los grupos de los equipos segundos y terceros para obtener los segundos que no se haya clasificado ningún tercero
 
 let secondWithOutthird = [];
@@ -140,7 +141,6 @@ function findGroupRep() {
 	});
 }
 findGroupRep();
-
 
 export let secondWithThirdTeams = [];
 export let secondWithOutthirdTeams = [];
@@ -155,12 +155,12 @@ secondClasificated.forEach((element) => {
 	}
 });
 
-import { roundOfEight } from "./firstRound.js"
-import { roundOfFour } from "./nextRounds.js" 
-import { semiFinal } from "./nextRounds.js"
-import { consolation } from "./nextRounds.js"
-import { final } from "./nextRounds.js"
-import { champion } from "./nextRounds.js"
+import { roundOfEight } from "./firstRound.js";
+import { roundOfFour } from "./nextRounds.js";
+import { semiFinal } from "./nextRounds.js";
+import { consolation } from "./nextRounds.js";
+import { final } from "./nextRounds.js";
+import { champion } from "./nextRounds.js";
 
 console.log("====== OCTAVOS DE FINAL ======\n");
 roundOfEight.setlocalTeamsForEight();
@@ -201,4 +201,6 @@ final.matchs.forEach((element) => {
 	final.getWinner(element);
 });
 
-console.log (`\n=====================================\n${champion[0].name} CAMPEONA DE LA EURO!\n=====================================`)
+console.log(
+	`\n=====================================\n${champion[0].name} CAMPEONA DE LA EURO!\n=====================================`
+);
