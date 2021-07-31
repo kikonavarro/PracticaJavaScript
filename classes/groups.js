@@ -1,4 +1,4 @@
-import { dataTeams } from "./teams.js";
+import { dataTeams } from "../teams.js";
 
 export default class Group {
     constructor (groupName, config = {}) {
@@ -85,12 +85,10 @@ export default class Group {
                 const result = this.playGame(match)
                 this.updateTeams(result)
                 matchDaySummary.results.push(result)
-                // console.log (`El resultado es ${result.homeTeamName} ${result.homeGoals} - ${result.awayTeamName} ${result.awayGoals}`)
             }
             
             matchDaySummary.standings = this.getStandings().map(team => Object.assign({}, team));;
             this.summaries.push(matchDaySummary);
-            // console.log (matchDaySummary)
         }
     
     }
@@ -175,19 +173,3 @@ export default class Group {
 
 
 } 
-
-const configLeague = {
-    pointsPerWin: 3,
-    pointsPerDraw: 1,
-    pointsPerLose: 0,
-}
-
-
-export let groupA = new Group('Grupo A', configLeague);
-export let groupB = new Group('Grupo B', configLeague);
-export let groupC = new Group('Grupo C', configLeague);
-export let groupD = new Group('Grupo D', configLeague);
-export let groupE = new Group('Grupo E', configLeague);
-export let groupF = new Group('Grupo F', configLeague);
-
-

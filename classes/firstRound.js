@@ -1,7 +1,7 @@
-import { firstClasificated } from "./index.js";
-import { secondWithOutthirdTeams } from "./index.js";
-import { secondWithThirdTeams } from "./index.js";
-import { bestThirdClasificated } from "./index.js";
+import { firstClasificated } from "../index.js";
+import { secondWithOutthirdTeams } from "../index.js";
+import { secondWithThirdTeams } from "../index.js";
+import { bestThirdClasificated } from "../index.js";
 
 function shuffle(array) {
 	array.sort(() => Math.random() - 0.5);
@@ -112,17 +112,4 @@ export class Round {
 	}
 }
 
-export let roundOfEight = new Round("Octavos");
 
-// roundOfEight.setlocalTeamsForEight();
-// roundOfEight.setAwayTeamsForEight();
-// roundOfEight.setMatchs();
-// roundOfEight.selectLocalTeamsInMatch();
-// roundOfEight.selectAwayTeamsInMatch();
-
-// console.log("====== OCTAVOS DE FINAL ======\n");
-// roundOfEight.matchs.forEach((element) => {
-// 	roundOfEight.getWinner(element);
-// });
-
-export let nextRound = roundOfEight.winners;

@@ -1,9 +1,21 @@
-import { groupA } from "./groups.js";
-import { groupB } from "./groups.js";
-import { groupC } from "./groups.js";
-import { groupD } from "./groups.js";
-import { groupE } from "./groups.js";
-import { groupF } from "./groups.js";
+import Group from "./classes/groups.js";
+import { Round } from "./classes/firstRound.js";
+import { NextRound } from "./classes/nextRounds.js";
+
+//declaramos constante con la configuración de la parte de todos contra todos en los grupos
+const configLeague = {
+	pointsPerWin: 3,
+	pointsPerDraw: 1,
+	pointsPerLose: 0,
+};
+
+//instanciamos cada grupo como clase de Group
+let groupA = new Group("Grupo A", configLeague);
+let groupB = new Group("Grupo B", configLeague);
+let groupC = new Group("Grupo C", configLeague);
+let groupD = new Group("Grupo D", configLeague);
+let groupE = new Group("Grupo E", configLeague);
+let groupF = new Group("Grupo F", configLeague);
 
 console.log("*******************\nCOMIENZA EL TORNEO\n*******************\n");
 console.log(`Grupos y equipos\n=================\n`);
@@ -105,9 +117,6 @@ function getClasificated() {
 }
 
 getClasificated();
-console.log(
-	"************************************************\n******COMIENZO DE LA FASE DE ELIMINATORIAS******\n************************************************\n"
-);
 
 bestThirdClasificated.push(
 	thirdClasificated[0],
@@ -155,14 +164,12 @@ secondClasificated.forEach((element) => {
 	}
 });
 
-import { roundOfEight } from "./firstRound.js";
-import { roundOfFour } from "./nextRounds.js";
-import { semiFinal } from "./nextRounds.js";
-import { consolation } from "./nextRounds.js";
-import { final } from "./nextRounds.js";
-import { champion } from "./nextRounds.js";
+console.log(
+	"************************************************\n******COMIENZO DE LA FASE DE ELIMINATORIAS******\n************************************************\n"
+);
 
 console.log("====== OCTAVOS DE FINAL ======\n");
+let roundOfEight = new Round("Octavos");
 roundOfEight.setlocalTeamsForEight();
 roundOfEight.setAwayTeamsForEight();
 roundOfEight.setMatchs();
@@ -171,23 +178,30 @@ roundOfEight.selectAwayTeamsInMatch();
 roundOfEight.matchs.forEach((element) => {
 	roundOfEight.getWinner(element);
 });
+let nextRound = roundOfEight.winners;
 
-export let nextRound = roundOfEight.winners;
+
 console.log("\n======= CUARTOS DE FINAL =======\n");
+const roundOfFour = new NextRound("roundOfFour", nextRound);
 roundOfFour.setMatchs();
 roundOfFour.selectTeams();
 roundOfFour.matchs.forEach((element) => {
 	roundOfFour.getWinner(element);
 });
+let semifinalClasificated = roundOfFour.winners;
 
 console.log("\n======= SEMIFINALES =======\n");
+const semiFinal = new NextRound("semiFinal", semifinalClasificated);
 semiFinal.setMatchs();
 semiFinal.selectTeamsForSemis();
 semiFinal.matchs.forEach((element) => {
 	semiFinal.getWinner(element);
 });
+let finalClasificated = semiFinal.winners;
+let consolationClasificated = semiFinal.loosers;
 
 console.log("\n======= TERCER Y CUARTO PUESTO =======\n");
+const consolation = new NextRound("consolacion", consolationClasificated);
 consolation.setMatchs();
 consolation.selectTeams();
 consolation.matchs.forEach((element) => {
@@ -195,11 +209,13 @@ consolation.matchs.forEach((element) => {
 });
 
 console.log("\n========== FINAL ==========\n");
+const final = new NextRound("final", finalClasificated);
 final.setMatchs();
 final.selectTeams();
 final.matchs.forEach((element) => {
 	final.getWinner(element);
 });
+let champion = final.winners;
 
 console.log(
 	`\n=====================================\n${champion[0].name} CAMPEONA DE LA EURO!\n=====================================`
