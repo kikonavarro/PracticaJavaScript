@@ -78,7 +78,7 @@ function showResults() {
 showResults();
 
 //rellenar array con equipos clasificados, serán los primeros y segundos de cada grupo y los 4 mejores terceros
-let clasificatedTeams = [];
+
 export let firstClasificated = [];
 let secondClasificated = [];
 let thirdClasificated = [];
@@ -168,7 +168,15 @@ console.log(
 	"************************************************\n******COMIENZO DE LA FASE DE ELIMINATORIAS******\n************************************************\n"
 );
 
-console.log("====== OCTAVOS DE FINAL ======\n");
+console.log ("LOS EQUIPOS CLASIFICADOS PARA LAS ELIMINATORIAS SON:")
+let clasificatedTeams = [firstClasificated, bestThirdClasificated, secondClasificated];
+clasificatedTeams.forEach(element => {
+	element.forEach(team => {
+		console.log (`\n${team.name}`)		
+	});
+});
+
+console.log("\n====== OCTAVOS DE FINAL ======\n");
 let roundOfEight = new Round("Octavos");
 roundOfEight.setlocalTeamsForEight();
 roundOfEight.setAwayTeamsForEight();
